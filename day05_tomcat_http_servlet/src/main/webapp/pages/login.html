@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>form空白</title>
+    <base href="/day06_servlet/">
+</head>
+<body>
+
+<h2>登录页面-用户名&密码&提交</h2>
+<form action="LoginServlet" method="get">
+    用户名：<input id="username" type="text" name="username" placeholder="请输入用户名" value="" /><br>
+    密码：<input id="pwd" type="password" name="password" value="123"/><br>
+    <input id="btnSub" type="submit" value="登录" >
+</form>
+<br>
+<a href="index.html">回首页</a><br>
+<a id="aEle" href="login_success.html">删除Book信息</a>
+</body>
+<script type="text/javascript">
+
+    /*
+        实现非空验证
+     */
+    var btnSubEle = document.getElementById("btnSub");
+    btnSubEle.onclick = function () {
+        //验证用户名是否为空【用户名只能是字母、数字、_（6-12位）】
+        var unValue = document.getElementById("username").value;
+        if(unValue == ""){
+            alert("用户名不能为空请重新输入！");
+            //取消默认行为
+            return false;
+        }
+        //验证密码是否为空
+        var pwdValue = document.getElementById("pwd").value;
+        if(pwdValue == ""){
+            alert("密码不能为空，请重新输入！");
+            //取消默认行为
+            return false;
+        }
+
+    }
+
+    //超链接js案例
+    var aEle = document.getElementById("aEle");
+    aEle.onclick = function () {
+        var yOn = confirm("是否删除当前Book信息？");
+        if(yOn == false){
+            //不删除【取消超链接默认行为】
+            return false;
+        }
+    }
+
+
+
+
+</script>
+</html>

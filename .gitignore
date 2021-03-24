@@ -1,0 +1,5 @@
+# Project exclude paths
+/bookstore02_student/target/
+/day05_tomcat_http_servlet/target/
+/day27jdbc01/target/
+/day28jdbc02/target/
