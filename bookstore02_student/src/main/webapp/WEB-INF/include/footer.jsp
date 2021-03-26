@@ -8,6 +8,6 @@
 <%@ page pageEncoding="UTF-8" %>
 <div id="bottom">
 			<span>
-				尚硅谷书城.Copyright &copy;2015
+				BookStore.Copyright &copy;2021
 			</span>
 </div>

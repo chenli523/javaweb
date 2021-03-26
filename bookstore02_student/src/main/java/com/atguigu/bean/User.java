@@ -1,6 +1,10 @@
 package com.atguigu.bean;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
+
+    private static final long serialVersionUID = -8185446265831884668L;
     private Integer id;
     private String username;
     private String lastname;
@@ -13,6 +17,9 @@ public class User {
 
     public User(String username, String password, String email) {
         this.username = username;
+        //temporary
+        this.lastname = "lastname";
+        this.firstname = "firstname";
         this.password = password;
         this.email = email;
     }

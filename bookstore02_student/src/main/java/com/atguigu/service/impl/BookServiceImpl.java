@@ -59,9 +59,15 @@ public class BookServiceImpl implements BookService {
         Page<Book> page = new Page<>();
         // support page number is null
         int pN = 1;
-        double mn = 0;
+        double mn = 0.0;
         double mx = Double.MAX_VALUE;
         try {
+            if (min == "") {
+                min = "0";
+            }
+            if (max == "") {
+                max = String.valueOf(Double.MAX_VALUE);
+            }
             pN = Integer.parseInt(pageNo);
             mn = Double.parseDouble(min);
             mx = Double.parseDouble(max);

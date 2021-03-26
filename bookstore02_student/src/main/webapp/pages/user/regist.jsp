@@ -3,7 +3,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>尚硅谷会员注册页面</title>
+    <title>BookStore Membership Register</title>
     <%@ include file="/WEB-INF/include/base.jsp"%>
     <link type="text/css" rel="stylesheet" href="static/css/style.css" />
     <link rel="stylesheet" href="static/css/register.css" />
@@ -22,13 +22,21 @@
          */
         $(function () {
 
+            // changing auth code while clicking img
+            $("#imgCode").click(function () {
+                // rand is for lower version browsers
+                $(this).attr("src","KaptchaServlet?rand="+Math.random())
+            })
+
+
             //恢复提示框默认情况
             $(".errMess").css("visibility","hidden");
+            $("#authCodeMsg").css("visibility","visible");
 
             // username exists or not
             var msg = "${requestScope.msg}"
             // if (msg == "null") {
-            if (msg != null || "".equals(msg)) {
+            if (msg == "") {
               $("#unMsg").css("visibility","hidden")
             } else {
               $("#unMsg").css("visibility","visible");
@@ -102,7 +110,6 @@
 
             }
 
-
             //用户名change事件
             $("#username").change(checkUserName);
             //密码change事件
@@ -133,53 +140,53 @@
 
     <div class="login_banner">
       <div class="register_form">
-        <h1>注册尚硅谷会员</h1>
+        <h1>register membership</h1>
         <form action="UserServlet">
 <%--          for user servlet --%>
           <input type="hidden" name="method" value="regist">
           <div class="form-item">
             <div>
-              <label>用户名称:</label>
+              <label>username:</label>
 <%--              <input id="username" value="<%=request.getParameter("username") == null ? "" : request.getParameter("username")%>" name="username" type="text" placeholder="请输入用户名" />--%>
-                <input id="username" value="${param.username}" name="username" type="text" placeholder="请输入用户名" />
+                <input id="username" value="${param.username}" name="username" type="text" placeholder="enter username" />
             </div>
 
-              <span id="unMsg" class="errMess">${empty requestScope.msg ? "用户名只能是字母（大小写）、数字、_。6-18位" : requestScope.msg}</span>
+              <span id="unMsg" class="errMess">${empty requestScope.msg ? "username can only be characters. numbers . _. 6-18 length" : requestScope.msg}</span>
 <%--            <span id="unMsg" class="errMess"><%=request.getAttribute("msg") == null ? "用户名只能是字母（大小写）、数字、_。6-18位"  : request.getAttribute("msg")%></span>--%>
           </div>
           <div class="form-item">
             <div>
-              <label>用户密码:</label>
-              <input id="pwd" name="pwd" type="password" placeholder="请输入密码" />
+              <label>password:</label>
+              <input id="pwd" name="pwd" type="password" placeholder="enter password" />
             </div>
-            <span id="pwdMsg" class="errMess">密码只能是字母（大小写）、数字、_。6-18位</span>
+            <span id="pwdMsg" class="errMess">password can only be characters. numbers . _. 6-18 length</span>
           </div>
           <div class="form-item">
             <div>
-              <label>确认密码:</label>
-              <input id="pwdRep" type="password" placeholder="请输入确认密码" />
+              <label>re-password:</label>
+              <input id="pwdRep" type="password" placeholder="re-enter password" />
             </div>
-            <span id="pwdRepMsg" class="errMess">密码两次输入不一致</span>
+            <span id="pwdRepMsg" class="errMess">passwords are different</span>
           </div>
           <div class="form-item">
             <div>
-              <label>用户邮箱:</label>
-                <input id="email" value="${param.email}" name="email" type="text" placeholder="请输入邮箱" />
+              <label>email:</label>
+                <input id="email" value="${param.email}" name="email" type="text" placeholder="enter email" />
 <%--              <input id="email" value="<%=request.getParameter("email") == null ? "" : request.getParameter("email")%>" name="email" type="text" placeholder="请输入邮箱" />--%>
             </div>
-            <span id="emailMsg" class="errMess">请输入正确的邮箱格式</span>
+            <span id="emailMsg" class="errMess">please enter valid email</span>
           </div>
           <div class="form-item">
             <div>
-              <label>验证码:</label>
+              <label>auth code:</label>
               <div class="verify">
-                <input type="text" placeholder="" />
-                <img src="static/img/code.bmp" alt="" />
+                <input name="authCode" type="text" placeholder="" />
+                <img id="imgCode" src="KaptchaServlet" alt="" width="100px" height="40px" />
               </div>
             </div>
-            <span class="errMess">请输入正确的验证码</span>
+            <span id="authCodeMsg" class="errMess">${requestScope.authCodeMsg}</span>
           </div>
-          <button id="btnSub" class="btn">注册</button>
+          <button id="btnSub" class="btn">register</button>
         </form>
       </div>
     </div>

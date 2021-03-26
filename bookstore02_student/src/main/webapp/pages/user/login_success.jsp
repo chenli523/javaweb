@@ -23,15 +23,15 @@
 					<img class="logo_img" alt="" src="static/img/logo.gif" />
 				</a>
 				<div>
-					<span>欢迎<span class="um_span">张总</span>光临尚硅谷书城</span>
+					<span>欢迎<span class="um_span">${sessionScope.user.username}</span>光临尚硅谷书城</span>
 					<a href="pages/order/order.jsp">我的订单</a>
-					<a href="index.jsp">注销</a>&nbsp;&nbsp;
+					<a href="UserServlet?method=logOut">注销</a>
 					<a href="index.jsp">返回</a>
 				</div>
 		</div>
 		
 		<div id="main">
-		
+
 			<h1>欢迎回来 <a href="index.jsp">转到主页</a></h1>
 	
 		</div>

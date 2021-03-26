@@ -9,6 +9,59 @@
     <link rel="stylesheet" href="static/css/minireset.css" />
     <link rel="stylesheet" href="static/css/common.css" />
     <link rel="stylesheet" href="static/css/cart.css" />
+    <script type="text/javascript" src="static/script/jquery-1.7.2.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        $("tbody td a").click(function() {
+          let title = $(this).prop("name");
+          let rs = confirm("Deleting <" + title +"> from the cart?");
+          if (!rs) {
+            return false;
+          }
+        });
+        // click event for clearing the cart
+        $(".footer .footer-left .clear-cart").click(function() {
+          let rs = confirm("Clearing the cart?");
+          if (!rs) {
+            return false;
+          }
+        });
+        // changing shopping items
+        $(".count-num").change(function () {
+          let bookId = $(this).attr("id");
+          let newCount = $(this).val();
+          let regEx = /^\+?[1-9][0-9]*$/;
+          let deVal = this.defaultValue;
+          if (regEx.test(newCount) == false) {
+            $(this).val(deVal);
+            alert("Positive numbers only");
+            return false;
+          }
+          location.href = "CartServlet?method=updateItemCount&count="+newCount+"&bookId="+bookId;
+        })
+
+        $("span[name='count-dec']").click(function () {
+          let $input = $(this).next();
+          let newCount = $input.val();
+          let bookId = $input.attr("id");
+          if(--newCount > 0) {
+            $input.val(newCount);
+            location.href = "CartServlet?method=updateItemCount&count="+newCount+"&bookId="+bookId;
+          } else {
+            location.href = "CartServlet?method=deleteItemById&&bookId="+bookId;
+          }
+        })
+
+        $("span[name='count-inc']").click(function () {
+          let $input = $(this).prev();
+          let newCount = $input.val();
+          let bookId = $input.attr("id");
+          $input.val(++newCount);
+          location.href = "CartServlet?method=updateItemCount&count="+newCount+"&bookId="+bookId;
+        })
+
+      });
+    </script>
   </head>
   <body>
     <div class="header">
@@ -17,126 +70,134 @@
           <a href="index.jsp">
             <img src="static/img/logo.gif" alt=""
           /></a>
-          <h1>我的购物车</h1>
+          <h1>My Shopping Cart</h1>
         </div>
-        <div class="header-right">
-          <h3>欢迎<span>张总</span>光临尚硅谷书城</h3>
-          <div class="order"><a href="pages/order/order.jsp">我的订单</a></div>
-          <div class="destory"><a href="index.jsp">注销</a></div>
-          <div class="gohome">
-            <a href="index.jsp">返回</a>
-          </div>
-        </div>
+        <%@ include file="/WEB-INF/include/welcome.jsp"%>
+<%--        <div class="header-right">--%>
+<%--          <h3>欢迎<span>张总</span>光临尚硅谷书城</h3>--%>
+<%--          <div class="order"><a href="pages/order/order.jsp">我的订单</a></div>--%>
+<%--          <div class="destory"><a href="index.jsp">注销</a></div>--%>
+<%--          <div class="gohome">--%>
+<%--            <a href="index.jsp">返回</a>--%>
+<%--          </div>--%>
+<%--        </div>--%>
       </div>
     </div>
+    <c:if test="${empty sessionScope.cart.cartItems}">
+      <div style="font-size: 25px; color: #666666;" align="center">Go Shopping!</div>
+    </c:if>
+    <c:if test="${not empty sessionScope.cart.cartItems}">
     <div class="list">
       <div class="w">
         <table>
           <thead>
             <tr>
-              <th>图片</th>
-              <th>商品名称</th>
+              <th>Cover</th>
+              <th>Product Name</th>
 
-              <th>数量</th>
-              <th>单价</th>
-              <th>金额</th>
-              <th>操作</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Amount</th>
+              <th>Operations</th>
             </tr>
           </thead>
           <tbody>
+          <c:forEach var="cartItem" items="${sessionScope.cart.cartItems}">
             <tr>
               <td>
-                <img src="static/uploads/huozhe.jpg" alt="" />
+                <img src="${cartItem.book.imgPath}" alt="" />
               </td>
-              <td>活着</td>
+              <td>${cartItem.book.title}</td>
               <td>
-                <span class="count">-</span>
-                <input class="count-num" type="text" value="1" />
-                <span class="count">+</span>
+                <span class="count" name="count-dec">-</span>
+                <input class="count-num" id="${cartItem.book.id}" type="text" value="${cartItem.count}" />
+                <span class="count" name="count-inc">+</span>
               </td>
-              <td>36.8</td>
-              <td>36.8</td>
-              <td><a href="">删除</a></td>
+              <td>${cartItem.book.price}</td>
+              <td>${cartItem.amount}</td>
+              <td><a name="${cartItem.book.title}" href="CartServlet?method=deleteItemById&bookId=${cartItem.book.id}">Delete</a></td>
             </tr>
-            <tr>
-              <td>
-                <img src="static/uploads/kanjian.jpg" alt="" />
-              </td>
-              <td>看见</td>
-              <td>
-                <span class="count">-</span>
-                <input class="count-num" type="text" value="1" />
-                <span class="count">+</span>
-              </td>
-              <td>40.1</td>
-              <td>40.1</td>
-              <td><a href="">删除</a></td>
-            </tr>
-            <tr>
-              <td>
-                <img src="static/uploads/kanjian.jpg" alt="" />
-              </td>
-              <td>
-                假如书名太长了,只展示一部分书名.自动展示省略号
-              </td>
-              <td>
-                <span class="count">-</span>
-                <input class="count-num" type="text" value="1" />
-                <span class="count">+</span>
-              </td>
-              <td>40.1</td>
-              <td>40.1</td>
-              <td><a href="">删除</a></td>
-            </tr>
-            <tr>
-              <td>
-                <img src="static/uploads/kanjian.jpg" alt="" />
-              </td>
-              <td>
-                假如书名太长了,只展示一部分书名.自动展示省略号
-              </td>
-              <td>
-                <!-- <div> -->
-                <span class="count">-</span>
-                <input class="count-num" type="text" value="100" />
-                <span class="count">+</span>
-                <!-- </div> -->
-              </td>
-              <td>40.1</td>
-              <td>40.1</td>
-              <td><a href="">删除</a></td>
-            </tr>
-            <tr>
-              <td>
-                <img src="static/uploads/kanjian.jpg" alt="" />
-              </td>
-              <td>
-                假如书名太长了,只展示一部分书名.自动展示省略号
-              </td>
-              <td>
-                <span class="count">-</span>
-                <input class="count-num" type="text" value="99" />
-                <span class="count">+</span>
-              </td>
-              <td>40.1</td>
-              <td>40.1</td>
-              <td><a href="">删除</a></td>
-            </tr>
+          </c:forEach>
+<%--            <tr>--%>
+<%--              <td>--%>
+<%--                <img src="static/uploads/kanjian.jpg" alt="" />--%>
+<%--              </td>--%>
+<%--              <td>看见</td>--%>
+<%--              <td>--%>
+<%--                <span class="count">-</span>--%>
+<%--                <input class="count-num" type="text" value="1" />--%>
+<%--                <span class="count">+</span>--%>
+<%--              </td>--%>
+<%--              <td>40.1</td>--%>
+<%--              <td>40.1</td>--%>
+<%--              <td><a href="">删除</a></td>--%>
+<%--            </tr>--%>
+<%--            <tr>--%>
+<%--              <td>--%>
+<%--                <img src="static/uploads/kanjian.jpg" alt="" />--%>
+<%--              </td>--%>
+<%--              <td>--%>
+<%--                假如书名太长了,只展示一部分书名.自动展示省略号--%>
+<%--              </td>--%>
+<%--              <td>--%>
+<%--                <span class="count">-</span>--%>
+<%--                <input class="count-num" type="text" value="1" />--%>
+<%--                <span class="count">+</span>--%>
+<%--              </td>--%>
+<%--              <td>40.1</td>--%>
+<%--              <td>40.1</td>--%>
+<%--              <td><a href="">删除</a></td>--%>
+<%--            </tr>--%>
+<%--            <tr>--%>
+<%--              <td>--%>
+<%--                <img src="static/uploads/kanjian.jpg" alt="" />--%>
+<%--              </td>--%>
+<%--              <td>--%>
+<%--                假如书名太长了,只展示一部分书名.自动展示省略号--%>
+<%--              </td>--%>
+<%--              <td>--%>
+<%--                <!-- <div> -->--%>
+<%--                <span class="count">-</span>--%>
+<%--                <input class="count-num" type="text" value="100" />--%>
+<%--                <span class="count">+</span>--%>
+<%--                <!-- </div> -->--%>
+<%--              </td>--%>
+<%--              <td>40.1</td>--%>
+<%--              <td>40.1</td>--%>
+<%--              <td><a href="">删除</a></td>--%>
+<%--            </tr>--%>
+<%--            <tr>--%>
+<%--              <td>--%>
+<%--                <img src="static/uploads/kanjian.jpg" alt="" />--%>
+<%--              </td>--%>
+<%--              <td>--%>
+<%--                假如书名太长了,只展示一部分书名.自动展示省略号--%>
+<%--              </td>--%>
+<%--              <td>--%>
+<%--                <span class="count">-</span>--%>
+<%--                <input class="count-num" type="text" value="99" />--%>
+<%--                <span class="count">+</span>--%>
+<%--              </td>--%>
+<%--              <td>40.1</td>--%>
+<%--              <td>40.1</td>--%>
+<%--              <td><a href="">删除</a></td>--%>
+<%--            </tr>--%>
           </tbody>
         </table>
         <div class="footer">
           <div class="footer-left">
-            <a href="#" class="clear-cart">清空购物车</a>
-            <a href="#">继续购物</a>
+            <a href="CartServlet?method=clearCart" class="clear-cart">Empty Cart</a>
+            <a href="index.jsp">Continue Shopping</a>
           </div>
           <div class="footer-right">
-            <div>共<span>3</span>件商品</div>
-            <div class="total-price">总金额<span>99.9</span>元</div>
-            <a class="pay" href="pages/cart/checkout.jsp">去结账</a>
+            <div>Total<span>${sessionScope.cart.totalCount}</span> items</div>
+            <div class="total-price">Total Amount $<span>${sessionScope.cart.totalAmount}</span></div>
+            <a class="pay" href="pages/cart/checkout.jsp">Check Out</a>
           </div>
         </div>
       </div>
     </div>
+    </c:if>
     <div class="bottom">
       <div class="w">
         <div class="top">

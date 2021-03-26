@@ -27,6 +27,7 @@ public class BookClientServlet extends BaseServlet {
         String pN = request.getParameter("pageNo");
         String minPrice = request.getParameter("minPrice");
         String maxPrice = request.getParameter("maxPrice");
+        System.out.println(pN);
 //        2.
         Page<Book> booksByPage = bookService.getBooksByPageAndPrice(pN, minPrice, maxPrice);
 //        3.

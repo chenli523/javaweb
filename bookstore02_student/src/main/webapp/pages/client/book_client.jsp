@@ -6,12 +6,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>书城首页</title>
+    <title>BookStore Home</title>
     <%--    <base href="<%=request.getContextPath()%>/">--%>
     <%@ include file="/WEB-INF/include/base.jsp"%>
     <link rel="stylesheet" href="static/css/minireset.css" />
@@ -23,18 +24,23 @@
     <script type="text/javascript">
         $(function() {
             // jump to certain page
-            $("#btnSub").click(function () {
-                var pn = $("#pN").val();
-                var minPrice = $("#minPrice").val();
-                var maxPrice = $("#maxPrice").val();
-                location.href = "BookClientServlet?method=getBooksByPageAndPrice&pageNo=" + pn + "&minPrice=" +minPrice+"&maxPrice="+maxPrice;
-            });
+            // $("#btnSub").click(function () {
+            //     let pn = $("#pN").val();
+            //     let minPrice = $("#minPrice").val();
+            //     let maxPrice = $("#maxPrice").val();
+            //     location.href = "BookClientServlet?method=getBooksByPageAndPrice&pageNo=" + pn + "&minPrice=" +minPrice+"&maxPrice="+maxPrice;
+            // });
             // search with a price range
-            $(".price-search button").click(function() {
-                var pNum = $("#pN").val();
-                var minPrice = $("#minPrice").val();
-                var maxPrice = $("#maxPrice").val();
+            $("#btnSub, .price-search button").click(function() {
+                let pNum = $("#pN").val();
+                let minPrice = $("#minPrice").val();
+                let maxPrice = $("#maxPrice").val();
                 location.href = "BookClientServlet?method=getBooksByPageAndPrice&pageNo=" + pNum + "&minPrice=" +minPrice+"&maxPrice="+maxPrice;
+            });
+            // add book to the cart
+            $(".list-content button").click(function () {
+                let bookId = $(this).attr("id");
+                location.href = "CartServlet?method=addBook&bookId=" + bookId;
             })
         });
     </script>
@@ -44,22 +50,20 @@
     <div class="topbar">
         <div class="w">
             <div class="topbar-left">
-                <i>送至:</i>
-                <i>北京</i>
+                <i>Location:</i>
+                <i>Los Angeles</i>
                 <i class="iconfont icon-ai-arrow-down"></i>
             </div>
             <div class="topbar-right">
-                <a href="pages/user/login.jsp" class="login">登录</a>
-                <a href="pages/user/regist.jsp" class="register">注册</a>
-                <a
-                        href="pages/cart/cart.jsp"
-                        class="cart iconfont icon-gouwuche
-			"
-                >
-                    购物车
-                    <div class="cart-num">3</div>
+                <a href="pages/user/login.jsp" class="login">Log In</a>
+                <a href="pages/user/regist.jsp" class="register">Sign Up</a>
+                <a href="pages/cart/cart.jsp" class="cart iconfont icon-gouwuche">
+                    Cart
+                    <c:if test="${not empty sessionScope.cart.totalCount and sessionScope.cart.totalCount > 0}">
+                        <div class="cart-num">${sessionScope.cart.totalCount}</div>
+                    </c:if>
                 </a>
-                <a href="BookServlet?method=getBooksByPage&pageNo=1" class="admin">后台管理</a>
+                <a href="BookServlet?method=getBooksByPage&pageNo=1" class="admin">Backstage Management</a>
             </div>
             <!--          登录后风格-->
             <!--          <div class="topbar-right">-->
@@ -172,11 +176,11 @@
                 <div class="list-header">
                     <div class="title">Book List</div>
                     <div class="price-search">
-                        <span>price:</span>
+                        <span>price: $</span>
                         <input type="text" id="minPrice" value="${param.minPrice}">
                         <span>-$</span>
                         <input type="text" id="maxPrice" value="${param.maxPrice}">
-                        <span>$</span>
+                        <span></span>
                         <button>search</button>
                     </div>
                 </div>
@@ -189,7 +193,7 @@
                             <p>price:$${book.price}</p>
                             <p>sales:${book.sales}</p>
                             <p>stock:${book.stock}</p>
-                            <button>add to cart</button>
+                            <button id="${book.id}">add to cart</button>
                         </div>
                     </c:forEach>
                 </div>

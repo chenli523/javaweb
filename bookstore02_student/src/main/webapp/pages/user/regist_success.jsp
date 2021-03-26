@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>尚硅谷会员注册页面</title>
+<title>Membership Registration</title>
 	<%@ include file="/WEB-INF/include/base.jsp"%>
 <link type="text/css" rel="stylesheet" href="static/css/style.css" >
 <style type="text/css">
@@ -24,16 +24,16 @@
 				</a>
 				<span class="wel_word"></span>
 				<div>
-					<span>欢迎<span class="um_span">张总</span>光临尚硅谷书城</span>
-					<a href="pages/order/order.jsp">我的订单</a>
-					<a href="index.jsp">注销</a>&nbsp;&nbsp;
-					<a href="index.jsp">返回</a>
+					<span>welcome<span class="um_span">${sessionScope.user.username}</span>welcome to the bookstore</span>
+					<a href="pages/order/order.jsp">my orders</a>
+					<a href="index.jsp">log out</a>&nbsp;&nbsp;
+					<a href="index.jsp">return</a>
 				</div>
 		</div>
 		
 		<div id="main">
 		
-			<h1>注册成功! <a href="index.jsp">转到主页</a></h1>
+			<h1>registered successfully! <a href="index.jsp">home</a></h1>
 	
 		</div>
 		

@@ -48,11 +48,13 @@ public class UserServlet extends BaseServlet {
     protected void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         //
+        HttpSession session = request.getSession();
         final String username = request.getParameter("username");
         final String password = request.getParameter("password");
         User user = userService.getUser(new User(username, password, null));
         if (user != null) {
             // redirect to login_success
+            session.setAttribute("user", user);
             response.sendRedirect(request.getContextPath() + "/pages/user/login_success.jsp");
         } else {
             // forward to login
@@ -65,13 +67,36 @@ public class UserServlet extends BaseServlet {
         final String username = request.getParameter("username");
         final String pwd = request.getParameter("pwd");
         final String email = request.getParameter("email");
-        User user = userService.checkUserName(username);
-        if (user == null) {
-            userService.saveUser(new User(username,  pwd, email));
-            response.sendRedirect(request.getContextPath()+"/pages/user/regist_success.jsp");
+        //auth code and session one
+        String authCode = request.getParameter("authCode");
+        HttpSession session = request.getSession();
+        Object sessionVal = session.getAttribute("KAPTCHA_SESSION_KEY");
+        if (sessionVal != null && sessionVal.toString().equals(authCode)) {
+            // auth code correct
+            // fail the code
+            session.removeAttribute("KAPTCHA_SESSION_KEY");
+            // check userinfo
+            User user = userService.checkUserName(username);
+            if (user == null) {
+                userService.saveUser(new User(username,  pwd, email));
+                response.sendRedirect(request.getContextPath()+"/pages/user/regist_success.jsp");
+            } else {
+//                System.out.println("username is existed, please renter");
+                request.setAttribute("msg","username is existed, please renter");
+                request.getRequestDispatcher("/pages/user/regist.jsp").forward(request, response);
+            }
         } else {
-            request.setAttribute("msg","username/password is wrong, please renter");
+            // incorrect auth code
+            request.setAttribute("authCodeMsg","auth code incorrect, please renter");
             request.getRequestDispatcher("/pages/user/regist.jsp").forward(request, response);
         }
+
+    }
+
+    protected void logOut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //
+        HttpSession session = request.getSession();
+        session.removeAttribute("user");
+        response.sendRedirect(request.getContextPath() + "/index.jsp");
     }
 }

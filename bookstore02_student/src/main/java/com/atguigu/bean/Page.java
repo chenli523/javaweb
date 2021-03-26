@@ -1,9 +1,11 @@
 package com.atguigu.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Page<T> {
+public class Page<T> implements Serializable {
     public static final int PAGE_SIZE = 10;
+    private static final long serialVersionUID = 3637096835003671877L;
     private int pageNo;
     private int totalPageNo;
     private int totalRecord;

@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>我的订单</title>
+    <title>My Order</title>
     <%@ include file="/WEB-INF/include/base.jsp"%>
     <link rel="stylesheet" href="static/css/minireset.css" />
     <link rel="stylesheet" href="static/css/common.css" />
@@ -19,16 +19,17 @@
           <a href="index.jsp">
             <img src="static/img/logo.gif" alt=""
           /></a>
-          <h1>我的订单</h1>
+          <h1>My Order</h1>
         </div>
-        <div class="header-right">
-          <h3>欢迎<span>张总</span>光临尚硅谷书城</h3>
-          <div class="order"><a href="pages/order/order.jsp">我的订单</a></div>
-          <div class="destory"><a href="index.jsp">注销</a></div>
-          <div class="gohome">
-            <a href="index.jsp">返回</a>
-          </div>
-        </div>
+        <%@ include file="/WEB-INF/include/welcome.jsp"%>
+<%--        <div class="header-right">--%>
+<%--          <h3>欢迎<span>张总</span>光临尚硅谷书城</h3>--%>
+<%--          <div class="order"><a href="pages/order/order.jsp">我的订单</a></div>--%>
+<%--          <div class="destory"><a href="index.jsp">注销</a></div>--%>
+<%--          <div class="gohome">--%>
+<%--            <a href="index.jsp">返回</a>--%>
+<%--          </div>--%>
+<%--        </div>--%>
       </div>
     </div>
     <div class="list">
