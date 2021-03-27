@@ -10,10 +10,11 @@ import java.lang.reflect.Method;
 @WebServlet(name = "BaseServlet", value = "/BaseServlet")
 public class BaseServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // post messy code
-        request.setCharacterEncoding("UTF-8");
-        // for response messy code
-        response.setContentType("text/html; charset=UTF-8");
+//        // post messy code
+//        request.setCharacterEncoding("UTF-8");
+//        // for response messy code
+//        response.setContentType("text/html; charset=UTF-8");
+
         String method = request.getParameter("method");
 //        if ("login".equals(method)) {
 //            login(request,response);

@@ -46,6 +46,9 @@ public class BookServiceImpl implements BookService {
         // support page number is null
         int pN = 1;
         try {
+            if (pageNo == null || "".equals(pageNo)) {
+                pageNo = "1";
+            }
             pN = Integer.parseInt(pageNo);
         } catch (NumberFormatException e) {
             e.printStackTrace();

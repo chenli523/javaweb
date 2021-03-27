@@ -408,9 +408,10 @@
                 </dl>
             </div>
         </div>
-        <div class="down">
-            尚硅谷书城.Copyright ©2015
-        </div>
+        <%@ include file="/WEB-INF/include/footer.jsp"%>
+<%--        <div class="down">--%>
+<%--            尚硅谷书城.Copyright ©2015--%>
+<%--        </div>--%>
     </div>
 
 
