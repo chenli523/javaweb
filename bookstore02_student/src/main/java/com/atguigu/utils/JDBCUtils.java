@@ -12,7 +12,10 @@ import java.util.Properties;
 
 public class JDBCUtils {
     static DataSource dataSource;
-
+//    private static Connection connection = null;
+//    wrong way cause thread is not safe
+//    correct way: threadlocal
+    private static ThreadLocal<Connection> threadLocal = new ThreadLocal<>();
     public static void main(String[] args) {
 
     }
@@ -30,37 +33,41 @@ public class JDBCUtils {
     }
     // 1.get connection
     public static Connection getConnection() {
-        Connection connection = null;
-
+        Connection connection = threadLocal.get();
         try {
-            connection = dataSource.getConnection();
+            if (connection == null) {
+                connection = dataSource.getConnection();
+                threadLocal.set(connection);
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         return connection;
     }
     // 2.close resources
-    public static void releaseResources(Connection connection, Statement statement, ResultSet resultSet) {
+    public static void releaseResources() {
+        Connection connection = threadLocal.get();
         if (connection != null) {
             try {
                 connection.close();
+                threadLocal.remove();
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
         }
-        if (statement != null) {
-            try {
-                statement.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-        }
-        if (resultSet != null) {
-            try {
-                resultSet.close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-        }
+//        if (statement != null) {
+//            try {
+//                statement.close();
+//            } catch (SQLException throwables) {
+//                throwables.printStackTrace();
+//            }
+//        }
+//        if (resultSet != null) {
+//            try {
+//                resultSet.close();
+//            } catch (SQLException throwables) {
+//                throwables.printStackTrace();
+//            }
+//        }
     }
 }
