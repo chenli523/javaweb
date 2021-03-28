@@ -14,6 +14,7 @@ public interface BookDao {
     public Book getBookById(String bookId);
     public int updateBookById(Book book);
     public int updateBookById(int stock, int sales, int id);
+    public int[] updateBatchBookById(Object[][] params);
     public Page<Book> getBooksByPage(Page<Book> page);
     public Page<Book> getBooksByPageAndPrice(Page<Book> page, double min, double max);
 }

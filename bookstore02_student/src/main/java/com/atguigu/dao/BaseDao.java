@@ -50,6 +50,21 @@ public class BaseDao<T> {
         }
         return result;
     }
+
+    //add/delete/update batch
+    public int[] updateBatch(String sql, Object[][] args) {
+        Connection connection = null;
+        int[] result = null;
+        try {
+            connection = JDBCUtils.getConnection();
+            result = queryRunner.batch(connection, sql, args);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            JDBCUtils.releaseResources(connection,null,null);
+        }
+        return result;
+    }
     public List<T> getBeanList(String sql, Object... params) {
         // 获取连接
         Connection connection = JDBCUtils.getConnection();

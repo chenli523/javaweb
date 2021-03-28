@@ -26,21 +26,39 @@ public class OrderServiceImpl implements OrderService {
             orderDao.insert(new Order(orderId, new Date(), cart.getTotalCount(), cart.getTotalAmount(), 0, user.getId()));
             // generating a order detail
             List<CartItem> cartItems = cart.getCartItems();
-            for (CartItem cartItem : cartItems) {
-                Book book = cartItem.getBook();
-                orderItemDao.insert(new OrderItem(null,
-                        cartItem.getCount(),
-                        cartItem.getAmount(),
+            // defining batch operations on order details
+            Object[][] params = new Object[cartItems.size()][];
+            Object[][] bookParams = new Object[cartItems.size()][];
+            for (int i = 0; i < cartItems.size(); i++) {
+                Book book = cartItems.get(i).getBook();
+//                orderItemDao.insert(new OrderItem(null,
+//                        cartItems.get(i).getCount(),
+//                        cartItems.get(i).getAmount(),
+//                        book.getTitle(),
+//                        book.getAuthor(),
+//                        book.getPrice(),
+//                        book.getImgPath(),
+//                        orderId));
+                // initializing params
+                params[i] = new Object[] {
+                        null,
+                        cartItems.get(i).getCount(),
+                        cartItems.get(i).getAmount(),
                         book.getTitle(),
                         book.getAuthor(),
                         book.getPrice(),
                         book.getImgPath(),
-                        orderId));
+                        orderId
+                };
                 // change sales and stocks
-                int newStock = book.getStock() - cartItem.getCount();
-                int newSales = book.getSales() + cartItem.getCount();
-                bookDao.updateBookById(newStock, newSales, book.getId());
+                int newStock = book.getStock() - cartItems.get(i).getCount();
+                int newSales = book.getSales() + cartItems.get(i).getCount();
+//                bookDao.updateBookById(newStock, newSales, book.getId());
+                bookParams[i] = new Object[]{newStock, newSales, book.getId()};
             }
+            // optimized way: batch operation
+            orderItemDao.insert(params);
+            bookDao.updateBatchBookById(bookParams);
             // clearing the cart
             cart.clearCart();
         } catch (Exception e) {

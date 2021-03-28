@@ -51,6 +51,12 @@ public class BookDaoImpl extends BaseDao<Book> implements BookDao {
     }
 
     @Override
+    public int[] updateBatchBookById(Object[][] params) {
+        String sql = "update books set stock = ?, sales = ? where id = ?";
+        return updateBatch(sql, params);
+    }
+
+    @Override
     public Page<Book> getBooksByPage(Page<Book> page) {
         String sql1 = "select count(1) from books";
         int totalRecord = Integer.parseInt(getSingleValue(sql1) + "");
