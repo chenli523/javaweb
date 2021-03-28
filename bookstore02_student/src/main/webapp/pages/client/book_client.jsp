@@ -88,17 +88,17 @@
         <a href="#" class="header-logo"></a>
         <div class="header-nav">
             <ul>
-                <li><a href="#">java</a></li>
-                <li><a href="#">前端</a></li>
-                <li><a href="#">小说</a></li>
-                <li><a href="#">文学</a></li>
-                <li><a href="#">青春文学</a></li>
-                <li><a href="#">艺术</a></li>
-                <li><a href="#">管理</a></li>
+                <li><a href="#">Java</a></li>
+                <li><a href="#">Front End</a></li>
+                <li><a href="#">Fiction</a></li>
+                <li><a href="#">Literature</a></li>
+                <li><a href="#">Young Adult</a></li>
+                <li><a href="#">Art</a></li>
+                <li><a href="#">Management</a></li>
             </ul>
         </div>
         <div class="header-search">
-            <input type="text" placeholder="十万个为什么" />
+            <input type="text" placeholder="I Wonder Why" />
             <button class="iconfont icon-search"></button>
         </div>
     </div>
@@ -107,43 +107,43 @@
             <ul>
                 <li>
                     <a href="">
-                        <span>文学 鉴赏</span>
+                        <span>Literature & Fiction</span>
                         <i class="iconfont icon-jiantou"></i
                         ></a>
                 </li>
                 <li>
                     <a href="">
-                        <span>社科 研究</span>
+                        <span>Science Fiction & Fantasy</span>
                         <i class="iconfont icon-jiantou"></i
                         ></a>
                 </li>
                 <li>
                     <a href="">
-                        <span>少儿 培训</span>
+                        <span>Teen & Young Adult</span>
                         <i class="iconfont icon-jiantou"></i
                         ></a>
                 </li>
                 <li>
                     <a href="">
-                        <span>艺术 赏析</span>
+                        <span>Arts & Photography</span>
                         <i class="iconfont icon-jiantou"></i
                         ></a>
                 </li>
                 <li>
                     <a href="">
-                        <span>生活 周边</span>
+                        <span>Sports & Outdoors</span>
                         <i class="iconfont icon-jiantou"></i
                         ></a>
                 </li>
                 <li>
                     <a href="">
-                        <span>文教 科技</span>
+                        <span>Education & Teaching</span>
                         <i class="iconfont icon-jiantou"></i
                         ></a>
                 </li>
                 <li>
                     <a href="">
-                        <span>热销 畅读</span>
+                        <span>Best Books of the Month</span>
                         <i class="iconfont icon-jiantou"></i
                         ></a>
                 </li>
@@ -355,63 +355,12 @@
                         <button>立即购买</button>
                     </a>
 
-
-
-
                     </ul>
                 </div>
             </div>
         </div>
     </div>
     <div class="bottom">
-        <div class="w">
-            <div class="top">
-                <ul>
-                    <li>
-                        <a href="">
-                            <img src="static/img/bottom1.png" alt="">
-                            <span>大咖级讲师亲自授课</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <img src="static/img/bottom.png" alt="">
-                            <span>课程为学员成长持续赋能</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <img src="static/img/bottom2.png" alt="">
-                            <span>学员真是情况大公开</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="content">
-                <dl>
-                    <dt>关于尚硅谷</dt>
-                    <dd>教育理念</dd>
-                    <!-- <dd>名师团队</dd>
-                    <dd>学员心声</dd> -->
-                </dl>
-                <dl>
-                    <dt>资源下载</dt>
-                    <dd>视频下载</dd>
-                    <!-- <dd>资料下载</dd>
-                    <dd>工具下载</dd> -->
-                </dl>
-                <dl>
-                    <dt>加入我们</dt>
-                    <dd>招聘岗位</dd>
-                    <!-- <dd>岗位介绍</dd>
-                    <dd>招贤纳师</dd> -->
-                </dl>
-                <dl>
-                    <dt>联系我们</dt>
-                    <dd>http://www.atguigu.com<dd>
-                </dl>
-            </div>
-        </div>
         <%@ include file="/WEB-INF/include/footer.jsp"%>
 <%--        <div class="down">--%>
 <%--            尚硅谷书城.Copyright ©2015--%>

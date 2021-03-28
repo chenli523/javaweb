@@ -200,58 +200,59 @@
     </c:if>
     <div class="bottom">
       <div class="w">
-        <div class="top">
-          <ul>
-            <li>
-              <a href="">
-                <img src="static/img/bottom1.png" alt="" />
-                <span>大咖级讲师亲自授课</span>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <img src="static/img/bottom.png" alt="" />
-                <span>课程为学员成长持续赋能</span>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <img src="static/img/bottom2.png" alt="" />
-                <span>学员真是情况大公开</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="content">
-          <dl>
-            <dt>关于尚硅谷</dt>
-            <dd>教育理念</dd>
-            <!-- <dd>名师团队</dd>
-            <dd>学员心声</dd> -->
-          </dl>
-          <dl>
-            <dt>资源下载</dt>
-            <dd>视频下载</dd>
-            <!-- <dd>资料下载</dd>
-            <dd>工具下载</dd> -->
-          </dl>
-          <dl>
-            <dt>加入我们</dt>
-            <dd>招聘岗位</dd>
-            <!-- <dd>岗位介绍</dd>
-            <dd>招贤纳师</dd> -->
-          </dl>
-          <dl>
-            <dt>联系我们</dt>
-            <dd>http://www.atguigu.com</dd>
-            <dd></dd>
-          </dl>
-        </div>
-      </div>
+        <%@ include file="/WEB-INF/include/footerTop.jsp"%>
+<%--        <div class="top">--%>
+<%--          <ul>--%>
+<%--            <li>--%>
+<%--              <a href="">--%>
+<%--                <img src="static/img/bottom1.png" alt="" />--%>
+<%--                <span>大咖级讲师亲自授课</span>--%>
+<%--              </a>--%>
+<%--            </li>--%>
+<%--            <li>--%>
+<%--              <a href="">--%>
+<%--                <img src="static/img/bottom.png" alt="" />--%>
+<%--                <span>课程为学员成长持续赋能</span>--%>
+<%--              </a>--%>
+<%--            </li>--%>
+<%--            <li>--%>
+<%--              <a href="">--%>
+<%--                <img src="static/img/bottom2.png" alt="" />--%>
+<%--                <span>学员真是情况大公开</span>--%>
+<%--              </a>--%>
+<%--            </li>--%>
+<%--          </ul>--%>
+<%--        </div>--%>
+<%--        <div class="content">--%>
+<%--          <dl>--%>
+<%--            <dt>关于尚硅谷</dt>--%>
+<%--            <dd>教育理念</dd>--%>
+<%--            <!-- <dd>名师团队</dd>--%>
+<%--            <dd>学员心声</dd> -->--%>
+<%--          </dl>--%>
+<%--          <dl>--%>
+<%--            <dt>资源下载</dt>--%>
+<%--            <dd>视频下载</dd>--%>
+<%--            <!-- <dd>资料下载</dd>--%>
+<%--            <dd>工具下载</dd> -->--%>
+<%--          </dl>--%>
+<%--          <dl>--%>
+<%--            <dt>加入我们</dt>--%>
+<%--            <dd>招聘岗位</dd>--%>
+<%--            <!-- <dd>岗位介绍</dd>--%>
+<%--            <dd>招贤纳师</dd> -->--%>
+<%--          </dl>--%>
+<%--          <dl>--%>
+<%--            <dt>联系我们</dt>--%>
+<%--            <dd>http://www.atguigu.com</dd>--%>
+<%--            <dd></dd>--%>
+<%--          </dl>--%>
+<%--        </div>--%>
+<%--      </div>--%>
 <%--      <div class="down">--%>
 <%--        尚硅谷书城.Copyright ©2015--%>
-<%--      </div>--%>
-      <%@ include file="/WEB-INF/include/footer.jsp"%>
+        <%@ include file="/WEB-INF/include/footer.jsp"%>
+      </div>
     </div>
   </body>
 </html>

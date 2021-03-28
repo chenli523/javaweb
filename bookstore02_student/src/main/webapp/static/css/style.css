@@ -10,7 +10,7 @@ input {
 
 * {
   margin: 0;
-  font-family: 'Microsoft Yahei';
+  font-family: 'Arial';
   /* color: #666; */
 }
 
@@ -183,7 +183,7 @@ h1 {
   /* width: 100px; */
   border: 0 none;
   float: none;
-  font-family: '宋体';
+  font-family: "Arial";
   font-size: 14px;
   height: 18px;
   line-height: 18px;
