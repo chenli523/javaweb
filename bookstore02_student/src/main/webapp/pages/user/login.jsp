@@ -96,7 +96,7 @@
                 />
                 <br />
                 <br />
-                <input type="submit" value="登录" id="sub_btn" />
+                <input type="submit" value="Log In" id="sub_btn" />
               </form>
               <div class="tit">
                 <a href="regist.jsp">立即注册</a>

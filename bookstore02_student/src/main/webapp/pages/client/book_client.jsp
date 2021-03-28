@@ -23,6 +23,7 @@
     <script type="text/javascript" src="static/script/jquery-1.7.2.js"></script>
     <script type="text/javascript">
         $(function() {
+
             // jump to certain page
             // $("#btnSub").click(function () {
             //     let pn = $("#pN").val();
@@ -57,12 +58,15 @@
             <div class="topbar-right">
                 <a href="pages/user/login.jsp" class="login">Log In</a>
                 <a href="pages/user/regist.jsp" class="register">Sign Up</a>
-                <a href="pages/cart/cart.jsp" class="cart iconfont icon-gouwuche">
-                    Cart
-                    <c:if test="${not empty sessionScope.cart.totalCount and sessionScope.cart.totalCount > 0}">
-                        <div class="cart-num">${sessionScope.cart.totalCount}</div>
-                    </c:if>
-                </a>
+<%--                <c:if test="not empty ${sessionScope.user.username}">--%>
+                    <a href="pages/cart/cart.jsp" class="cart iconfont icon-gouwuche">
+                        Cart
+                        <c:if test="${not empty sessionScope.cart.totalCount and sessionScope.cart.totalCount > 0}">
+                            <div class="cart-num">${sessionScope.cart.totalCount}</div>
+                        </c:if>
+                    </a>
+<%--                </c:if>--%>
+<%--                ${sessionScope.user.username}--%>
                 <a href="BookServlet?method=getBooksByPage&pageNo=1" class="admin">Backstage Management</a>
             </div>
             <!--          登录后风格-->

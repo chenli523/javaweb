@@ -39,6 +39,13 @@ public class Book implements Serializable {
                 '}';
     }
 
+//    check out processing
+//            pay -> split the order
+//            generate order
+//            order details
+//            change stock and sales
+//            empty the cart
+
     public Integer getId() {
         return id;
     }

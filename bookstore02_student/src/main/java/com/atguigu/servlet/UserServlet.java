@@ -99,4 +99,8 @@ public class UserServlet extends BaseServlet {
         session.removeAttribute("user");
         response.sendRedirect(request.getContextPath() + "/index.jsp");
     }
+
+    protected void logInSuccess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.sendRedirect(request.getContextPath() + "/index.jsp");
+    }
 }

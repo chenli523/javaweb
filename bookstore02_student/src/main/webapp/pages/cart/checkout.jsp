@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>结算页面</title>
+<title>Check Out</title>
 	<%@ include file="/WEB-INF/include/base.jsp"%>
 <link type="text/css" rel="stylesheet" href="static/css/style.css" >
 	<link rel="stylesheet" href="static/css/minireset.css" />
@@ -39,21 +39,22 @@
 					<a href="index.jsp">
 						<img src="static/img/logo.gif" alt=""
 						/></a>
-					<span>我的购物车</span>
+					<span>My Shopping Cart</span>
 				</div>
-				<div class="header-right">
-					<h3>欢迎<span>张总</span>光临尚硅谷书城</h3>
-					<div class="order"><a href="pages/order/order.jsp">我的订单</a></div>
-					<div class="destory"><a href="index.jsp">注销</a></div>
-					<div class="gohome">
-						<a href="index.jsp">返回</a>
-					</div>
-				</div>
+				<%@ include file="/WEB-INF/include/welcome.jsp"%>
+<%--				<div class="header-right">--%>
+<%--					<h3>欢迎<span>张总</span>光临尚硅谷书城</h3>--%>
+<%--					<div class="order"><a href="pages/order/order.jsp">我的订单</a></div>--%>
+<%--					<div class="destory"><a href="index.jsp">注销</a></div>--%>
+<%--					<div class="gohome">--%>
+<%--						<a href="index.jsp">返回</a>--%>
+<%--					</div>--%>
+<%--				</div>--%>
 			</div>
 		</div>
 	
 	<div id="main">
-		<h1>你的订单已结算，订单号为:<span class="oid">546845626455846</span></h1>
+		<h1>你的订单已结算，订单号为:<span class="oid">${sessionScope.orderId}</span></h1>
 	</div>
 
 <%--	<div id="bottom">--%>

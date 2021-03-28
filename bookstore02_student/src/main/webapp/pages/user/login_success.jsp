@@ -23,16 +23,17 @@
 					<img class="logo_img" alt="" src="static/img/logo.gif" />
 				</a>
 				<div>
-					<span>欢迎<span class="um_span">${sessionScope.user.username}</span>光临尚硅谷书城</span>
-					<a href="pages/order/order.jsp">我的订单</a>
-					<a href="UserServlet?method=logOut">注销</a>
-					<a href="index.jsp">返回</a>
+					<span>Welcome<span class="um_span">${sessionScope.user.username}</span>to the BookStore</span>
+					<a href="pages/order/order.jsp">my order</a>
+					<a href="UserServlet?method=logOut">Log Out</a>
+					<a href="index.jsp">Return</a>
 				</div>
 		</div>
 		
 		<div id="main">
 
-			<h1>欢迎回来 <a href="index.jsp">转到主页</a></h1>
+<%--			<h1>Welcome Back <a href="UserServlet?method=logInSuccess">go to home</a></h1>--%>
+				<h1>Welcome Back <a href="index.jsp">go to home</a></h1>
 	
 		</div>
 		

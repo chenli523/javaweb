@@ -192,7 +192,7 @@
           <div class="footer-right">
             <div>Total<span>${sessionScope.cart.totalCount}</span> items</div>
             <div class="total-price">Total Amount $<span>${sessionScope.cart.totalAmount}</span></div>
-            <a class="pay" href="pages/cart/checkout.jsp">Check Out</a>
+            <a class="pay" href="OrderServlet?method=checkOut">Check Out</a>
           </div>
         </div>
       </div>
