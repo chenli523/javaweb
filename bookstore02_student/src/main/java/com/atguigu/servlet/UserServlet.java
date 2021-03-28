@@ -100,7 +100,7 @@ public class UserServlet extends BaseServlet {
         response.sendRedirect(request.getContextPath() + "/index.jsp");
     }
 
-    protected void logInSuccess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect(request.getContextPath() + "/index.jsp");
-    }
+//    protected void logInSuccess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        response.sendRedirect(request.getContextPath() + "/index.jsp");
+//    }
 }
