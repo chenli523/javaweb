@@ -99,8 +99,17 @@ public class UserServlet extends BaseServlet {
         session.removeAttribute("user");
         response.sendRedirect(request.getContextPath() + "/index.jsp");
     }
-
-//    protected void logInSuccess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        response.sendRedirect(request.getContextPath() + "/index.jsp");
-//    }
+    // ajax
+    protected void checkUserName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String unValue = request.getParameter("unValue");
+        // service
+        User user = userService.checkUserName(unValue);
+        if (user == null) {
+            // user is not exist
+            response.getWriter().write("true");
+        } else {
+            // user is existed
+            response.getWriter().write("false");
+        }
+    }
 }

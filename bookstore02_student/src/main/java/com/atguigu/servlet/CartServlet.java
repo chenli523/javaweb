@@ -2,13 +2,16 @@ package com.atguigu.servlet;
 
 import com.atguigu.bean.Book;
 import com.atguigu.bean.Cart;
+import com.atguigu.bean.CartItem;
 import com.atguigu.service.BookService;
 import com.atguigu.service.impl.BookServiceImpl;
+import com.google.gson.Gson;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.util.HashMap;
 
 @WebServlet(name = "CartServlet", value = "/CartServlet")
 public class CartServlet extends BaseServlet {
@@ -59,6 +62,19 @@ public class CartServlet extends BaseServlet {
         if (cart != null) {
             cart.updateItemCount(bookId, count);
         }
-        response.sendRedirect(request.getContextPath()+"/pages/cart/cart.jsp");
+//        response.sendRedirect(request.getContextPath()+"/pages/cart/cart.jsp");
+        CartItem cartItem = cart.getMap().get(bookId);
+        final double amount = cartItem.getAmount();
+        final int totalCount = cart.getTotalCount();
+        final double totalAmount = cart.getTotalAmount();
+
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("amount", amount);
+        map.put("totalCount", totalCount);
+        map.put("totalAmount", totalAmount);
+
+        Gson gson = new Gson();
+        String s = gson.toJson(map);
+        response.getWriter().write(s);
     }
 }

@@ -33,6 +33,31 @@
             $(".errMess").css("visibility","hidden");
             $("#authCodeMsg").css("visibility","visible");
 
+            // check username with ajax
+            function ajaxCheckUserName(unValue) {
+                // get username
+                // unValue = $(this).val();
+                // send request
+                $.ajax({
+                    type:"POST",
+                    url:"UserServlet?method=checkUserName",
+                    data:{"unValue":unValue},
+                    dataType:"text",
+                    success:function (rs) {
+                        // alert("rs:" + rs);
+                        if (rs == "true") {
+                            $("#unMsg").html("username is valid").css("color","#39987c")
+                        } else {
+                            $("#unMsg").html("username is existed")
+                        }
+                        $("#unMsg").css("visibility", "visible")
+                    },
+                    error:function () {
+                        alert("request failing!")
+                    }
+                })
+            }
+
             // username exists or not
             var msg = "${requestScope.msg}"
             // if (msg == "null") {
@@ -48,14 +73,16 @@
               验证用户名
              */
             function checkUserName(){
+                $("#unMsg").css("color","#ff0000")
                 //获取用户名
                 var username = $("#username").val();
                 //验证用户名是否合法
                 if(!regUap.test(username)){
-                   $("#unMsg").html("用户名只能是字母（大小写）、数字、_。6-18位").css("visibility","visible");
+                   $("#unMsg").html("username can only be characters. numbers . _. 6-18 length").css("visibility","visible");
                    return false;
                 }else{
-                   $("#unMsg").css("visibility","hidden");
+                   // $("#unMsg").css("visibility","hidden");
+                   ajaxCheckUserName(username);
                 }
             }
             /*

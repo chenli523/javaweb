@@ -37,7 +37,15 @@
             alert("Positive numbers only");
             return false;
           }
-          location.href = "CartServlet?method=updateItemCount&count="+newCount+"&bookId="+bookId;
+          // location.href = "CartServlet?method=updateItemCount&count="+newCount+"&bookId="+bookId;
+            let url = "CartServlet?method=updateItemCount";
+            let data = {"bookId":bookId, "count":newCount};
+            let $that = $(this).parent().next().next();
+            $.getJSON(url, data,  function cb(rs) {
+                $that.html(rs.amount)
+                $("#totalCount").html(rs.totalCount)
+                $("#totalAmount").html(rs.totalAmount)
+            })
         })
 
         $("span[name='count-dec']").click(function () {
@@ -46,7 +54,15 @@
           let bookId = $input.attr("id");
           if(--newCount > 0) {
             $input.val(newCount);
-            location.href = "CartServlet?method=updateItemCount&count="+newCount+"&bookId="+bookId;
+            // location.href = "CartServlet?method=updateItemCount&count="+newCount+"&bookId="+bookId;
+              let url = "CartServlet?method=updateItemCount";
+              let data = {"bookId":bookId, "count":newCount};
+              let $that = $(this).parent().next().next();
+              $.getJSON(url, data,  function cb(rs) {
+                  $that.html(rs.amount)
+                  $("#totalCount").html(rs.totalCount)
+                  $("#totalAmount").html(rs.totalAmount)
+              })
           } else {
             location.href = "CartServlet?method=deleteItemById&&bookId="+bookId;
           }
@@ -57,7 +73,15 @@
           let newCount = $input.val();
           let bookId = $input.attr("id");
           $input.val(++newCount);
-          location.href = "CartServlet?method=updateItemCount&count="+newCount+"&bookId="+bookId;
+          // location.href = "CartServlet?method=updateItemCount&count="+newCount+"&bookId="+bookId;
+            let url = "CartServlet?method=updateItemCount";
+            let data = {"bookId":bookId, "count":newCount};
+            let $that = $(this).parent().next().next();
+            $.getJSON(url, data,  function cb(rs) {
+                $that.html(rs.amount)
+                $("#totalCount").html(rs.totalCount)
+                $("#totalAmount").html(rs.totalAmount)
+            })
         })
 
       });
@@ -190,8 +214,8 @@
             <a href="index.jsp">Continue Shopping</a>
           </div>
           <div class="footer-right">
-            <div>Total<span>${sessionScope.cart.totalCount}</span> items</div>
-            <div class="total-price">Total Amount $<span>${sessionScope.cart.totalAmount}</span></div>
+            <div>Total<span id="totalCount">${sessionScope.cart.totalCount}</span> items</div>
+            <div class="total-price">Total Amount $<span id="totalAmount">${sessionScope.cart.totalAmount}</span></div>
             <a class="pay" href="OrderServlet?method=checkOut">Check Out</a>
           </div>
         </div>
